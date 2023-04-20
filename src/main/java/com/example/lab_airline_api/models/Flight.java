@@ -1,0 +1,116 @@
+package com.example.lab_airline_api.models;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity(name = "flights")
+public class Flight {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
+    private Long id;
+
+    @Column(name = "destinations")
+    private String destination;
+
+    @Column(name = "capacities")
+    private int capacity;
+
+    @Column(name = "departure_dates")
+    private String departureDate;
+
+    @Column(name = "departure_times")
+    private String departureTime;
+
+
+
+    @JsonIgnoreProperties({"flights"})
+    @ManyToMany
+
+    @JoinTable(
+            name = "flights_passengers",
+            joinColumns =  @JoinColumn(name = "flight_id"),
+            inverseJoinColumns = @JoinColumn(name = "passenger_id")
+    )
+    private List<Passenger> passengers;
+
+
+    public Flight(String destination, int capacity, String departureDate, String departureTime){
+        this.destination = destination;
+        this.capacity = capacity;
+        this.departureDate = departureDate;
+        this.departureTime = departureTime;
+        this.passengers = new ArrayList<>();
+    }
+
+    public Flight(){
+    }
+
+
+    // getters and setters
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public String getDepartureDate() {
+        return departureDate;
+    }
+
+    public void setDepartureDate(String departureDate) {
+        this.departureDate = departureDate;
+    }
+
+    public String getDepartureTime() {
+        return departureTime;
+    }
+
+    public void setDepartureTime(String departureTime) {
+        this.departureTime = departureTime;
+    }
+
+    public List<Passenger> getPassengers() {
+        return passengers;
+    }
+
+    public void setPassengers(List<Passenger> passengers) {
+        this.passengers = passengers;
+    }
+
+
+    // method to add passenger to flights:
+    public void addPassenger(Passenger passenger){
+        this.passengers.add(passenger);
+    }
+
+    // method to remove passenger from flights:
+    public void removePassenger(Passenger passenger){
+        this.passengers.remove(passenger);
+    }
+
+
+//
+}
