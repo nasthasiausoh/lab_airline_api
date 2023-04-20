@@ -39,7 +39,7 @@ public class FlightController {
 
 
 //Book a passenger on to a flight:
-    @PostMapping
+    @PostMapping(value = "/booking")
     public ResponseEntity<Flight> bookPassengerOnAFlight(@RequestBody FlightDTO flightDTO){
         Flight flight = flightService.saveFlight(flightDTO);
         return new ResponseEntity(flight, HttpStatus.CREATED);
@@ -52,12 +52,12 @@ public class FlightController {
         return new ResponseEntity<>(id, HttpStatus.OK);
     }
 
-    //// Add details of a new flight: POST SHOULD INCLUDE A REQUEST PARAM?
-//    @PostMapping
-//    public ResponseEntity<Optional<Flight>> addNewFlight(@RequestBody Flight flight){
-//        flightRepository.save(flight);
-//        return new ResponseEntity(flightRepository.findAll(), HttpStatus.CREATED);
-//    }
+    // Add details of a new flight: POST SHOULD INCLUDE A REQUEST PARAM?
+    @PostMapping
+    public ResponseEntity<Optional<Flight>> addNewFlight(@RequestBody Flight flight){
+        flightRepository.save(flight);
+        return new ResponseEntity(flightRepository.findAll(), HttpStatus.CREATED);
+    }
 
 
 //

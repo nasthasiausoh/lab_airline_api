@@ -26,7 +26,6 @@ public class DataLoader implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
-        //NATASHA
         Passenger natashaPassenger = new Passenger("Natasha", "natasha@gmail.com");
         passengerRepository.save(natashaPassenger);
 
@@ -36,7 +35,7 @@ public class DataLoader implements ApplicationRunner {
         Flight spainFlight = new Flight("Spain", 400, "09/05/23", "1pm");
         flightRepository.save(spainFlight);
 
-        // JOHN
+
         Passenger johnPassenger = new Passenger("John", "john@gmail.com");
         passengerRepository.save(johnPassenger);
 
@@ -46,7 +45,7 @@ public class DataLoader implements ApplicationRunner {
         Flight franceFlight = new Flight("France", 600, "09/06/23", "7am");
         flightRepository.save(franceFlight);
 
-        // SAM
+
         Passenger samPassenger = new Passenger("Sam", "sam@gmail.com");
         passengerRepository.save(samPassenger);
 
@@ -54,10 +53,11 @@ public class DataLoader implements ApplicationRunner {
         flightRepository.save(japanFlight);
 
         englandFlight.addPassenger(natashaPassenger);
+        japanFlight.addPassenger(johnPassenger);
+        japanFlight.addPassenger(natashaPassenger);
         spainFlight.addPassenger(johnPassenger);
         spainFlight.addPassenger(samPassenger);
-        japanFlight.addPassenger(natashaPassenger);
-        japanFlight.addPassenger(johnPassenger);
+
 
         flightRepository.save(englandFlight);
         flightRepository.save(spainFlight);
